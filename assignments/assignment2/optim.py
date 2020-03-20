@@ -40,9 +40,6 @@ class MomentumSGD:
         Returns:
         updated_weights, np array same shape as w
         """
-        # TODO Implement momentum update
-        # Hint: you'll need to introduce some variables to remember
-        # velocity from the previous updates
         self.velo *= self.momentum
         self.velo -= learning_rate * d_w
         return self.velo + w

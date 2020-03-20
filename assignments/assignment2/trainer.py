@@ -82,23 +82,17 @@ class Trainer:
             self.setup_optimizers()
 
         num_train = self.dataset.train_X.shape[0]
-
         loss_history = []
         train_acc_history = []
         val_acc_history = []
-        
-        for epoch in range(self.num_epochs):
+        for _ in range(self.num_epochs):
             shuffled_indices = np.arange(num_train)
             np.random.shuffle(shuffled_indices)
             sections = np.arange(self.batch_size, num_train, self.batch_size)
             batches_indices = np.array_split(shuffled_indices, sections)
-
             batch_losses = []
 
             for batch_indices in batches_indices:
-                # TODO Generate batches based on batch_indices and
-                # use model to generate loss and gradients for all
-                # the params
 
                 X_batch = self.dataset.train_X[batch_indices]
                 y_batch = self.dataset.train_y[batch_indices]
@@ -111,7 +105,6 @@ class Trainer:
                 batch_losses.append(loss)
 
             if np.not_equal(self.learning_rate_decay, 1.0):
-                # TODO: Implement learning rate decay
                 self.learning_rate *= self.learning_rate_decay
 
             ave_loss = np.mean(batch_losses)
